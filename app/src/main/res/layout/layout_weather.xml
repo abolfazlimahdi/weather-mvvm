@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="hourlyForecast"
+            type="abolfazli.mahdi.weather.weather.data.entities.WeatherMainEntity" />
+
+        <variable
+            name="weatherEntity"
+            type="abolfazli.mahdi.weather.weather.data.entities.WeatherEntity" />
+
+
+        <variable
+            name="time"
+            type="String" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tv_timeLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginBottom="16dp"
+            app:showDate="@{time}" />
+
+        <ImageView
+            android:id="@+id/iv_weatherIcon"
+            android:layout_width="64dp"
+            android:layout_height="64dp"
+            android:layout_gravity="center"
+            android:layout_marginBottom="16dp"
+            app:icon="@{@string/image_url(weatherEntity.icon)}" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            app:showDegree="@{hourlyForecast.temp}" />
+
+    </LinearLayout>
+
+
+</layout>

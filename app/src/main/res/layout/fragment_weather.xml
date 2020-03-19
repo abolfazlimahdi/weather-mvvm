@@ -1,0 +1,367 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="weather"
+            type="abolfazli.mahdi.weather.weather.data.entities.CurrentWeatherEntity" />
+
+        <variable
+            name="hourlyForecastWeather"
+            type="abolfazli.mahdi.weather.weather.data.entities.HourlyEntity" />
+
+        <variable
+            name="dailyForecastWeather"
+            type="abolfazli.mahdi.weather.weather.data.entities.HourlyEntity" />
+
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+        <ImageView
+            android:id="@+id/iv_search"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginRight="8dp"
+            android:background="@drawable/ic_search"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tv_humidityLabel"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="24dp"
+            android:text="@string/label_humidity"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tv_minTempLabel"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="8dp"
+            android:text="@string/label_min_temp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_humidityLabel" />
+
+        <TextView
+            android:id="@+id/tv_maxTempLabel"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="8dp"
+            android:text="@string/label_max_temp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_minTempLabel" />
+
+        <TextView
+            android:id="@+id/tv_pressureLabel"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="8dp"
+            android:text="@string/label_pressure"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_maxTempLabel" />
+
+        <TextView
+            android:id="@+id/tv_humidity"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
+            android:layout_marginTop="24dp"
+            app:showHumidity="@{weather.main.humidity}"
+            app:layout_constraintLeft_toRightOf="@id/tv_maxTempLabel"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="24%" />
+
+        <TextView
+            android:id="@+id/tv_minTemp"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
+            android:layout_marginTop="8dp"
+            app:showDegree="@{weather.main.temp_min}"
+            app:layout_constraintLeft_toRightOf="@id/tv_maxTempLabel"
+            app:layout_constraintTop_toBottomOf="@id/tv_humidity"
+            tools:text="14" />
+
+        <TextView
+            android:id="@+id/tv_maxTemp"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
+            android:layout_marginTop="8dp"
+            app:showDegree="@{weather.main.temp_max}"
+            app:layout_constraintLeft_toRightOf="@id/tv_maxTempLabel"
+            app:layout_constraintTop_toBottomOf="@id/tv_minTemp"
+            tools:text="19" />
+
+        <TextView
+            android:id="@+id/tv_pressure"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
+            android:layout_marginTop="8dp"
+            android:text="@{Integer.toString(weather.main.pressure)}"
+            app:layout_constraintLeft_toRightOf="@id/tv_maxTempLabel"
+            app:layout_constraintTop_toBottomOf="@id/tv_maxTemp"
+            tools:text="1.023" />
+
+        <TextView
+            android:id="@+id/tv_cityName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:text="@{weather.name}"
+            android:textSize="20sp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="Mashhad" />
+
+        <TextView
+            android:id="@+id/tv_weatherCondition"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="@{weather.weather[0].main}"
+            android:textSize="16sp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_cityName"
+            tools:text="broken clouds" />
+
+        <TextView
+            android:id="@+id/tv_currentTemp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            app:showDegree="@{weather.main.temp}"
+            android:textSize="64sp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_weatherCondition"
+            tools:text="14" />
+
+        <TextView
+            android:id="@+id/tv_todayLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="16dp"
+            android:text="@string/label_today"
+            android:textSize="16sp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_currentTemp" />
+
+        <View
+            android:id="@+id/divider_today"
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginRight="8dp"
+            android:background="@color/colorPrimary"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_todayLabel" />
+
+        <include
+            android:id="@+id/layout_today3h"
+            layout="@layout/layout_weather"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="16dp"
+            app:hourlyForecast="@{hourlyForecastWeather.list[0].main}"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toLeftOf="@id/layout_today6h"
+            app:layout_constraintTop_toBottomOf="@id/divider_today"
+            app:time="@{@string/hourly3h}"
+            app:weatherEntity="@{hourlyForecastWeather.list[0].weather[0]}" />
+
+        <include
+            android:id="@+id/layout_today6h"
+            layout="@layout/layout_weather"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            app:hourlyForecast="@{hourlyForecastWeather.list[1].main}"
+            app:layout_constraintLeft_toRightOf="@id/layout_today3h"
+            app:layout_constraintRight_toLeftOf="@id/layout_today9h"
+            app:layout_constraintTop_toBottomOf="@id/divider_today"
+            app:time="@{@string/hourly6h}"
+            app:weatherEntity="@{hourlyForecastWeather.list[1].weather[0]}" />
+
+        <include
+            android:id="@+id/layout_today9h"
+            layout="@layout/layout_weather"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            app:hourlyForecast="@{hourlyForecastWeather.list[2].main}"
+            app:layout_constraintLeft_toRightOf="@id/layout_today6h"
+            app:layout_constraintRight_toLeftOf="@id/layout_today12h"
+            app:layout_constraintTop_toBottomOf="@id/divider_today"
+            app:time="@{@string/hourly9h}"
+            app:weatherEntity="@{hourlyForecastWeather.list[2].weather[0]}" />
+
+        <include
+            android:id="@+id/layout_today12h"
+            layout="@layout/layout_weather"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            app:hourlyForecast="@{hourlyForecastWeather.list[3].main}"
+            app:layout_constraintLeft_toRightOf="@id/layout_today9h"
+            app:layout_constraintRight_toLeftOf="@id/layout_today15h"
+            app:layout_constraintTop_toBottomOf="@id/divider_today"
+            app:time="@{@string/hourly12h}"
+            app:weatherEntity="@{hourlyForecastWeather.list[3].weather[0]}" />
+
+        <include
+            android:id="@+id/layout_today15h"
+            layout="@layout/layout_weather"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            app:hourlyForecast="@{hourlyForecastWeather.list[4].main}"
+            app:layout_constraintLeft_toRightOf="@id/layout_today12h"
+            app:layout_constraintRight_toLeftOf="@id/layout_today18h"
+            app:layout_constraintTop_toBottomOf="@id/divider_today"
+            app:time="@{@string/hourly15h}"
+            app:weatherEntity="@{hourlyForecastWeather.list[4].weather[0]}" />
+
+        <include
+            android:id="@+id/layout_today18h"
+            layout="@layout/layout_weather"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            app:hourlyForecast="@{hourlyForecastWeather.list[5].main}"
+            app:layout_constraintLeft_toRightOf="@id/layout_today15h"
+            app:layout_constraintRight_toLeftOf="@id/layout_today21h"
+            app:layout_constraintTop_toBottomOf="@id/divider_today"
+            app:time="@{@string/hourly18h}"
+            app:weatherEntity="@{hourlyForecastWeather.list[5].weather[0]}" />
+
+        <include
+            android:id="@+id/layout_today21h"
+            layout="@layout/layout_weather"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:layout_marginRight="8dp"
+            app:hourlyForecast="@{hourlyForecastWeather.list[6].main}"
+            app:layout_constraintLeft_toRightOf="@id/layout_today18h"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/divider_today"
+            app:time="@{@string/hourly21h}"
+            app:weatherEntity="@{hourlyForecastWeather.list[6].weather[0]}" />
+
+
+        <TextView
+            android:id="@+id/tv_next5DaysLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="16dp"
+            android:text="@string/label_next5days"
+            android:textSize="16sp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/layout_today21h" />
+
+        <View
+            android:id="@+id/divider_next5days"
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginRight="8dp"
+            android:background="@color/colorPrimary"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_next5DaysLabel" />
+
+
+        <include
+            android:id="@+id/layout_tomorrow"
+            layout="@layout/layout_weather"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="16dp"
+            app:hourlyForecast="@{dailyForecastWeather.list[0].main}"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="@id/layout_today3h"
+            app:layout_constraintTop_toBottomOf="@id/divider_next5days"
+            app:time="@{dailyForecastWeather.list[0].dt_txt}"
+            app:weatherEntity="@{dailyForecastWeather.list[0].weather[0]}" />
+
+        <include
+            android:id="@+id/layout_2daysLater"
+            layout="@layout/layout_weather"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            app:hourlyForecast="@{dailyForecastWeather.list[1].main}"
+            app:layout_constraintLeft_toLeftOf="@id/layout_today6h"
+            app:layout_constraintRight_toRightOf="@id/layout_today6h"
+            app:layout_constraintTop_toBottomOf="@id/divider_next5days"
+            app:time="@{dailyForecastWeather.list[1].dt_txt}"
+            app:weatherEntity="@{dailyForecastWeather.list[1].weather[0]}" />
+
+        <include
+            android:id="@+id/layout_3daysLater"
+            layout="@layout/layout_weather"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            app:hourlyForecast="@{dailyForecastWeather.list[2].main}"
+            app:layout_constraintLeft_toLeftOf="@id/layout_today9h"
+            app:layout_constraintRight_toRightOf="@id/layout_today9h"
+            app:layout_constraintTop_toBottomOf="@id/divider_next5days"
+            app:time="@{dailyForecastWeather.list[2].dt_txt}"
+            app:weatherEntity="@{dailyForecastWeather.list[2].weather[0]}" />
+
+        <include
+            android:id="@+id/layout_4daysLater"
+            layout="@layout/layout_weather"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            app:hourlyForecast="@{dailyForecastWeather.list[3].main}"
+            app:layout_constraintLeft_toLeftOf="@id/layout_today12h"
+            app:layout_constraintRight_toRightOf="@id/layout_today12h"
+            app:layout_constraintTop_toBottomOf="@id/divider_next5days"
+            app:time="@{dailyForecastWeather.list[3].dt_txt}"
+            app:weatherEntity="@{dailyForecastWeather.list[3].weather[0]}" />
+
+        <include
+            android:id="@+id/layout_5daysLater"
+            layout="@layout/layout_weather"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            app:hourlyForecast="@{dailyForecastWeather.list[4].main}"
+            app:layout_constraintLeft_toLeftOf="@id/layout_today15h"
+            app:layout_constraintRight_toRightOf="@id/layout_today15h"
+            app:layout_constraintTop_toBottomOf="@id/divider_next5days"
+            app:time="@{dailyForecastWeather.list[4].dt_txt}"
+            app:weatherEntity="@{dailyForecastWeather.list[4].weather[0]}" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

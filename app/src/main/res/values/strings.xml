@@ -1,0 +1,24 @@
+<resources>
+    <string name="app_name">Weather</string>
+    <string name="api_key">82079108641e5aa21ceb937dfaffc1a4</string>
+    <string name="label_humidity">Humidity</string>
+    <string name="label_min_temp">Min Temp</string>
+    <string name="label_max_temp">Max Temp</string>
+    <string name="label_pressure">Pressure</string>
+    <string name="label_today">Today</string>
+    <string name="label_next5days">Next 5 days</string>
+    
+    <string name="hourly3h">3h</string>
+    <string name="hourly6h">6h</string>
+    <string name="hourly9h">9h</string>
+    <string name="hourly12h">12h</string>
+    <string name="hourly15h">15h</string>
+    <string name="hourly18h">18h</string>
+    <string name="hourly21h">21h</string>
+
+    <string name="image_url">https://openweathermap.org/img/wn/%s@2x.png</string>
+    <string name="label_cancel">Cancel</string>
+
+    <string name="show_degree">%s°</string>
+    <string name="show_humidity">%d.0%%</string>
+</resources>
