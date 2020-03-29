@@ -36,7 +36,7 @@ class WeatherViewModel @Inject constructor(
     }
 
 
-    fun getCurrentWeatherByCityName(
+    fun getCurrentWeatherByLatLon(
         appId: String,
         lat: String,
         lon: String
@@ -46,6 +46,31 @@ class WeatherViewModel @Inject constructor(
                 appId,
                 lat,
                 lon
+            )
+            withContext(Dispatchers.Main) {
+                try {
+                    if (response.isSuccessful) {
+                        currentWeather.value = response.body()
+                    } else {
+                        errorString.value = Errors.SERVER_ERROR.error
+                    }
+                } catch (e: HttpException) {
+                    errorString.value = e.message()
+                } catch (e: Throwable) {
+                    errorString.value = Errors.UNKNOWN.error
+                }
+            }
+        }
+    }
+
+    fun getCurrentWeatherByCityName(
+        appId: String,
+        cityName: String
+    ) {
+        CoroutineScope(Dispatchers.IO).launch {
+            val response = remoteDataSource.getCurrentWeatherByCityName(
+                appId,
+                cityName
             )
             withContext(Dispatchers.Main) {
                 try {
@@ -92,30 +117,7 @@ class WeatherViewModel @Inject constructor(
     }
 
 
-    fun getCurrentWeatherByCityName(
-        appId: String,
-        cityName: String
-    ) {
-        CoroutineScope(Dispatchers.IO).launch {
-            val response = remoteDataSource.getCurrentWeatherByCityName(
-                appId,
-                cityName
-            )
-            withContext(Dispatchers.Main) {
-                try {
-                    if (response.isSuccessful) {
-                        currentWeather.value = response.body()
-                    } else {
-                        errorString.value = Errors.SERVER_ERROR.error
-                    }
-                } catch (e: HttpException) {
-                    errorString.value = e.message()
-                } catch (e: Throwable) {
-                    errorString.value = Errors.UNKNOWN.error
-                }
-            }
-        }
-    }
+
 
     fun getHourlyForecastByCityName(
         appId: String,

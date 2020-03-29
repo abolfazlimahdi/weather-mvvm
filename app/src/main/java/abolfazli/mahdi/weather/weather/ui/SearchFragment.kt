@@ -24,7 +24,6 @@ import javax.inject.Inject
 
 class SearchFragment : Fragment() {
 
-
     @Inject
     lateinit var viewModel: WeatherViewModel
 

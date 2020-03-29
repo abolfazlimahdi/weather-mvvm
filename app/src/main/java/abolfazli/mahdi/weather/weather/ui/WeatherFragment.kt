@@ -153,7 +153,7 @@ class WeatherFragment : Fragment() {
                     if (location == null) {
                         requestNewLocationData()
                     } else {
-                        viewModel.getCurrentWeatherByCityName(
+                        viewModel.getCurrentWeatherByLatLon(
                             appId,
                             location.latitude.toString(),
                             location.longitude.toString()
@@ -191,7 +191,7 @@ class WeatherFragment : Fragment() {
     private val mLocationCallback = object : LocationCallback() {
         override fun onLocationResult(locationResult: LocationResult) {
             val location: Location = locationResult.lastLocation
-            viewModel.getCurrentWeatherByCityName(
+            viewModel.getCurrentWeatherByLatLon(
                 appId,
                 location.latitude.toString(),
                 location.longitude.toString()
